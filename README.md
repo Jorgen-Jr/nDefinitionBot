@@ -13,3 +13,4 @@ You will have the following options when entering the word.
 
 ### External References
 This bot uses the following api at [word API](http://word.com), huge thanks to individuals for providing this api.
+[Urban Dictionary, Dicionário Popular, Thesaurus, Aurélio]
