@@ -23,13 +23,6 @@ bot.on('inline_query', async (query) => {
 // Listen for any kind of message.
 bot.on('message', async (msg) => {
   const chatId = msg.chat.id;
-  // let title = "";
-  // let prep = "";
-  // let ingr = [];
-
-  // const req = {
-  //   title, prep, ingr
-  // }
   
   // const response = await NutritionController.getRecipeDetails(req);
 

@@ -12,4 +12,7 @@ Start typing `@ndefinitionbot` in any chat and it will show what definitions the
 You will have the following options when entering the word.
 
 ### External References
-This bot uses the following api at [word API](http://word.com), huge thanks to individuals for providing this api.
+This bot uses the following sources:
+ - [Thesaurus](http://word.com);
+ = [UrbanDictionary](http://urbandictionary.com);
+ 
