@@ -10,15 +10,15 @@
   "author": "Jorge Antônio da Silva Nascimento Junior",
   "license": "ISC",
   "devDependencies": {
-    "nodemon": "^1.19.4"
+    "nodemon": "^2.0.4"
   },
   "dependencies": {
-    "cheerio": "^1.0.0-rc.3",
-    "puppeteer": "^5.2.1",
     "axios": "^0.19.2",
+    "cheerio": "^1.0.0-rc.3",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.16.4",
-    "node-telegram-bot-api": "^0.50.0"
+    "node-telegram-bot-api": "^0.50.0",
+    "puppeteer": "^5.2.1"
   }
 }

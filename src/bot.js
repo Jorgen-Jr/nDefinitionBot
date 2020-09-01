@@ -2,6 +2,7 @@
 const TelegramBot = require('node-telegram-bot-api');
 const ThesaurusScrapper = require('./controllers/ThesaurusScrapper');
 const UrbanDictionaryScrapper = require('./controllers/UrbanDictionaryScrapper');
+const Definition = require('./models/Definition');
 
 const token = process.env.BOT_TOKEN;
 
@@ -15,6 +16,31 @@ bot.on('inline_query', async (query) => {
 
   if (queryContent) {
     
+    const definition = await ThesaurusScrapper.getWordDefinition(queryContent);
+
+    const definitions = definition.definition.map(def => {
+      const all_definitions = def.definitions.map(def => {
+        return '<i>' + def.index + '</i> ' + def.definition[0];
+      });
+
+      return '<i>' + def.category + '</i> \n' + all_definitions.join('\n');
+    });
+
+    console.log(definitions);
+
+    results.push({
+        type: 'Article',
+        id: results.length,
+        title: "Thesaurus",
+        description: definition.word.toUpperCase() + ' ' + definition.definition[0].value,
+        input_message_content: {
+          parse_mode: 'HTML',
+          message_text: '<b><i>' + definition.word + '</i></b> \n' +
+          definitions.join('\n') +
+          '\n <a href="' + definition.source + '">Source</a>'
+        },
+      });
+
   }
 
   bot.answerInlineQuery(queryId, results)
@@ -23,7 +49,7 @@ bot.on('inline_query', async (query) => {
 // Listen for any kind of message.
 bot.on('message', async (msg) => {
   const chatId = msg.chat.id;
-  
+
   // const response = await NutritionController.getRecipeDetails(req);
 
   // console.log(response);
