@@ -18,5 +18,5 @@ This bot uses the following sources:
  - [UrbanDictionary](http://urbandictionary.com);
  
  ### Incoming
- - [Dicionário Popular](https://www.dicionariopopular.com/)
- - [Priberam](https://dicionario.priberam.org)
+ - [Dicionário Popular](https://www.dicionariopopular.com/);
+ - [Priberam](https://dicionario.priberam.org);
