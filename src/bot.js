@@ -15,32 +15,61 @@ bot.on('inline_query', async (query) => {
   let results = [];
 
   if (queryContent) {
-    
-    const definition = await ThesaurusScrapper.getWordDefinition(queryContent);
 
-    const definitions = definition.definition.map(def => {
-      const all_definitions = def.definitions.map(def => {
-        return '<i>' + def.index + '</i> ' + def.definition[0];
+    try {
+
+      //Catch the word from TheSaurus
+      const definitionThesaurus = await ThesaurusScrapper.getWordDefinition(queryContent);
+
+      const definitionsThesaurus = definitionThesaurus.definition.map(def => {
+        const all_definitions = def.definitions.map(def => {
+          return '<i>' + def.index + '</i> ' + def.definition;
+        });
+
+        return '\n<i>' + def.category + '</i> \n' + all_definitions.join('\n');
       });
 
-      return '<i>' + def.category + '</i> \n' + all_definitions.join('\n');
-    });
-
-    results.push({
+      results.push({
         type: 'Article',
         id: results.length,
         title: "Thesaurus",
-        description: definition.word.toUpperCase() + ' ' + definition.definition[0].definitions[0].definition,
+        thumb_url: 'https://3.bp.blogspot.com/-orTOtEr_7M4/WbSpGZSNEVI/AAAAAAAAahY/J8GpIYK2rBsmeTQFzZYjhmUK96mdBpxXQCLcBGAs/s1600/thesaurus-logo.jpg',
+        description: definitionThesaurus.word.toUpperCase() + ' ' + definitionThesaurus.definition[0].definitions[0].definition,
         input_message_content: {
           parse_mode: 'HTML',
-          message_text: '<b><i>' + definition.word + '</i></b> \n' +
-          definitions.join('\n') +
-          '\n <a href="' + definition.source + '">Source</a>'
+          message_text: '<b><i>' + definitionThesaurus.word + '</i></b> \n' +
+            definitionsThesaurus.join('\n') +
+            '\n <a href="' + definitionThesaurus.source + '">Source</a>'
         },
       });
+    } catch (error) {
+      console.log(error);
+    }
 
+    //Catch the word from Urban Dictionary
+
+
+    try {
+      const definitionUrbanDictionary = await UrbanDictionaryScrapper.getWordDefinition(queryContent);
+
+      results.push({
+        type: 'Article',
+        id: results.length,
+        title: "Urban Dictionary",
+        thumb_url: 'http://www.extension.zone/wp-content/uploads/2015/11/Urban-Dictionary-logo.png',
+        description: definitionUrbanDictionary.word.toUpperCase() + ' ' + definitionUrbanDictionary.definition,
+        input_message_content: {
+          parse_mode: 'HTML',
+          message_text: '<b><i>' + definitionUrbanDictionary.word + '</i></b> \n\n' +
+            '<b>Definition:</b> ' + definitionUrbanDictionary.definition + '\n\n' +
+            '<b>Example:</b> <i>' + definitionUrbanDictionary.examples + '</i> \n' +
+            '\n <a href="' + definitionUrbanDictionary.source + '">Source</a>'
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
-
   bot.answerInlineQuery(queryId, results)
 });
 

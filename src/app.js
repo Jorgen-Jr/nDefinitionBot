@@ -42,4 +42,13 @@ router.get('/thesaurus/:word', async (req, res) => {
   return res.send(response);
 });
 
+
+router.get('/urbandictionary/:word', async (req, res) => {
+  const { word } = req.params;
+  
+  const response = await UrbanDictionaryScrapper.getWordDefinition(word);
+
+  return res.send(response);
+});
+
 module.exports = app.use('', router);

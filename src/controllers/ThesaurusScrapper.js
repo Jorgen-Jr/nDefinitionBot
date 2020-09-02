@@ -79,8 +79,8 @@ module.exports = {
 
             return definition;
         })
-            .catch(item => {
-                console.log(item);
+            .catch(error => {
+                console.log(error);
                 return false;
             });
     }
