@@ -47,8 +47,6 @@ bot.on('inline_query', async (query) => {
     }
 
     //Catch the word from Urban Dictionary
-
-
     try {
       const definitionUrbanDictionary = await UrbanDictionaryScrapper.getWordDefinition(queryContent);
 
@@ -76,10 +74,6 @@ bot.on('inline_query', async (query) => {
 // Listen for any kind of message.
 bot.on('message', async (msg) => {
   const chatId = msg.chat.id;
-
-  // const response = await NutritionController.getRecipeDetails(req);
-
-  // console.log(response);
 
   // send a message to the chat acknowledging receipt of their message
   bot.sendMessage(chatId, 'Sorry, coudn\'t catch that 😢 \nPlease use only inline commands for now.');
