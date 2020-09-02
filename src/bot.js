@@ -30,7 +30,7 @@ bot.on('inline_query', async (query) => {
         type: 'Article',
         id: results.length,
         title: "Thesaurus",
-        description: definition.word.toUpperCase() + ' ' + definitions[0],
+        description: definition.word.toUpperCase() + ' ' + definition.definition[0].definitions[0].definition,
         input_message_content: {
           parse_mode: 'HTML',
           message_text: '<b><i>' + definition.word + '</i></b> \n' +
