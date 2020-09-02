@@ -14,7 +14,6 @@ You will have the following options when entering the word.
 ### External References
 This bot uses the following sources:
  - [Thesaurus](http://word.com);
- 
  - [UrbanDictionary](http://urbandictionary.com);
  
  ### Incoming
