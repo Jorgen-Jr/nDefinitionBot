@@ -26,13 +26,11 @@ bot.on('inline_query', async (query) => {
       return '<i>' + def.category + '</i> \n' + all_definitions.join('\n');
     });
 
-    console.log(definitions);
-
     results.push({
         type: 'Article',
         id: results.length,
         title: "Thesaurus",
-        description: definition.word.toUpperCase() + ' ' + definition.definition[0].value,
+        description: definition.word.toUpperCase() + ' ' + definitions[0],
         input_message_content: {
           parse_mode: 'HTML',
           message_text: '<b><i>' + definition.word + '</i></b> \n' +
