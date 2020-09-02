@@ -14,4 +14,9 @@ You will have the following options when entering the word.
 ### External References
 This bot uses the following sources:
  - [Thesaurus](http://word.com);
- - [UrbanDictionary](http://urbandictionary.com);[Urban Dictionary, DicionÃ¡rio Popular, Thesaurus, AurÃ©lio]
+ 
+ - [UrbanDictionary](http://urbandictionary.com);
+ 
+ ### Incoming
+ - [Dicionário Popular](https://www.dicionariopopular.com/)
+ - [Priberam](https://dicionario.priberam.org)
