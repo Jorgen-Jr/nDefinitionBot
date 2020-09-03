@@ -13,15 +13,11 @@ module.exports = {
             //Returns word with top definition
             const def_card = await $('#resultados', html);
 
-            definition.word = def_card[0].childNodes[1].children[1].children[1].children[1].children[0].firstChild.firstChild.data;
+            definition.word = word;
             
-            console.log((def_card[0].childNodes[1].children[1].children[1].children[1].children[0].firstChild.firstChild.data));
-
             await $('.def', def_card).map(async (index, def) => {
-                const text = await $.html(def.children);
+                const text = await $.text(def.children);
                 
-                console.log(await $.text(def.children));
-
                 definition.definition.push({
                     index,
                     definition: text,
@@ -32,7 +28,7 @@ module.exports = {
         })
         .catch(error => {
             console.log(error);
-            return error.message;
+            return false;
         });
     }
 }
