@@ -10,7 +10,10 @@ Start typing `@ndefinitionbot` in any chat and it will show what definitions the
 
 ### Options
 You will have the following options when entering the word.
-
+ - Thesaurus (With the english definition)
+ - Urban Dictionary (With the Urban Dictionary definition in case of slangs)
+ - Priberam (With the portuguese definition)
+ 
 ### External References
 This bot uses the following sources:
  - [Thesaurus](http://word.com);
