@@ -15,7 +15,7 @@ You will have the following options when entering the word.
 This bot uses the following sources:
  - [Thesaurus](http://word.com);
  - [UrbanDictionary](http://urbandictionary.com);
+ - [Priberam](https://dicionario.priberam.org);
  
  ### Incoming
  - [Dicionário Popular](https://www.dicionariopopular.com/);
- - [Priberam](https://dicionario.priberam.org);
