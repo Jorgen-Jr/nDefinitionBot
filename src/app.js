@@ -32,6 +32,7 @@ router.get('/', (req, res) => {
 
 const ThesaurusScrapper = require('./controllers/ThesaurusScrapper');
 const UrbanDictionaryScrapper = require('./controllers/UrbanDictionaryScrapper');
+const PriberamScrapper = require('./controllers/PriberamScrapper');
 
 
 router.get('/thesaurus/:word', async (req, res) => {
@@ -47,6 +48,14 @@ router.get('/urbandictionary/:word', async (req, res) => {
   const { word } = req.params;
   
   const response = await UrbanDictionaryScrapper.getWordDefinition(word);
+
+  return res.send(response);
+});
+
+router.get('/priberam/:word', async (req, res) => {
+  const { word } = req.params;
+  
+  const response = await PriberamScrapper.getWordDefinition(word);
 
   return res.send(response);
 });
