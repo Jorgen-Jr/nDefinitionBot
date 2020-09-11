@@ -30,11 +30,12 @@ router.get('/', (req, res) => {
   res.json({ message: "I'm working hooman!" });
 });
 
+//Import all the controller
 const ThesaurusScrapper = require('./controllers/ThesaurusScrapper');
 const UrbanDictionaryScrapper = require('./controllers/UrbanDictionaryScrapper');
 const PriberamScrapper = require('./controllers/PriberamScrapper');
 
-
+//Use thesaurus
 router.get('/thesaurus/:word', async (req, res) => {
   const { word } = req.params;
   
@@ -43,7 +44,7 @@ router.get('/thesaurus/:word', async (req, res) => {
   return res.send(response);
 });
 
-
+//Use Urban Dictionary
 router.get('/urbandictionary/:word', async (req, res) => {
   const { word } = req.params;
   
@@ -52,7 +53,7 @@ router.get('/urbandictionary/:word', async (req, res) => {
   return res.send(response);
 });
 
-router.get('/priberam/:word', async (req, res) => {
+//Use Priberam router.get('/priberam/:word', async (req, res) => {
   const { word } = req.params;
   
   const response = await PriberamScrapper.getWordDefinition(word);
