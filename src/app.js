@@ -53,7 +53,8 @@ router.get('/urbandictionary/:word', async (req, res) => {
   return res.send(response);
 });
 
-//Use Priberam router.get('/priberam/:word', async (req, res) => {
+//Use Priberam 
+router.get('/priberam/:word', async (req, res) => {
   const { word } = req.params;
   
   const response = await PriberamScrapper.getWordDefinition(word);
