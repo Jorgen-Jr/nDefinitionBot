@@ -1,4 +1,3 @@
-
 const TelegramBot = require('node-telegram-bot-api');
 const ThesaurusScrapper = require('./controllers/ThesaurusScrapper');
 const UrbanDictionaryScrapper = require('./controllers/UrbanDictionaryScrapper');
