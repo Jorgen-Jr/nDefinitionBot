@@ -10,7 +10,7 @@ Start typing `@ndefinitionbot` in any chat and it will show what definitions the
 
 ### API Routes
 
-You can also send requests to `/thesaurus/{word}`,`/urbandictionary/{word}` and `/priberam/{word}` to get the definition on json format. 
+You can also send requests to `/thesaurus/{word}`,`/urbandictionary/{word}` and `/priberam/{word}` to get the definition in json format.
 
 ### Options
 You will have the following options when entering the word.
