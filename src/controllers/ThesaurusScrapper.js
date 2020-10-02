@@ -14,66 +14,54 @@ module.exports = {
             definition.word = await $('.e1rg2mtf5 > h1', html).text().toUpperCase();
 
             //Returns word definition
-            await $('.css-1urpfgu', html).map(async (index, definition_element) => {
-                if (index === 0) {
-                    await definition_element.children.forEach(async (definition_section, index) => {
-                        if (index !== 0) {
-                            let category = $.text(definition_section.firstChild.children);
+            const first_definition = $('.css-1fj93w9', html)[0];
 
-                            let return_def = {};
+            await $('section', first_definition).map(async (index, definition_element) => {
+                // Skip the first element, since it's a header for informations about...
+                if (index !== 0) {
+                    let category = $.text(await $('h3', definition_element))
 
-                            return_cat_definition = [];
+                    let return_def = {};
 
-                            await definition_section.children.forEach(async (definition_index) => {
+                    return_cat_definition = [];
 
-                                definition_index.children.forEach(async (definition_data) => {
-                                    let index = definition_data.attribs.value;
+                    await definition_element.children.forEach(async (definition_index) => {
+                        $('.default-content > div', definition_index).map((_, def) => {
 
-                                    let definition = [];
+                            let index = def.attribs.value;
 
-                                    if (definition_data.attribs.class.startsWith('expandable')) {
-                                        definition_data.firstChild.children.forEach(child => {
-                                            index = child.attribs.value;
-                                            const this_data = $.text(child.children);
+                            let definition = [];
 
-                                            definition.push(this_data)
+                            definition = $.text($('span', def));
 
-                                            return_cat_definition.push({
-                                                index,
-                                                definition: this_data,
-                                            })
-                                        });
-
-                                    } else {
-
-                                        if (index) {
-
-                                            definition_data.childNodes.forEach((data_span) => {
-                                                const this_data = $.text(data_span.children);
-
-                                                definition.push(this_data);
-                                            });
-
-                                            return_cat_definition.push({
-                                                index,
-                                                definition,
-                                            })
-                                        }
-                                    }
-
-
-                                });
-
-                                return_def = {
-                                    category,
-                                    definitions: return_cat_definition
-                                }
-
+                            return_cat_definition.push({
+                                index,
+                                definition,
                             });
+                        });
 
-                            await definition.definition.push(return_def);
+                        $('.expandable-content > div', definition_index).map((_, def) => {
+                            let index = def.attribs.value;
+
+                            let definition = [];
+
+                            definition = $.text($('span', def));
+
+                            return_cat_definition.push({
+                                index,
+                                definition,
+                            })
+                        });
+
+                        return_def = {
+                            category,
+                            definitions: return_cat_definition
                         }
                     });
+
+                    console.log(return_cat_definition);
+
+                    await definition.definition.push(return_def);
                 }
             });
 
