@@ -59,8 +59,6 @@ module.exports = {
                         }
                     });
 
-                    console.log(return_cat_definition);
-
                     await definition.definition.push(return_def);
                 }
             });
