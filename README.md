@@ -1,8 +1,7 @@
 # nDefinitionBot
 
-I wanted to test out how telegram bots works, so I made this little bot that give you the definition of a word through inline commands.
-
-It should return a list with the definition for the given word.
+> I wanted to test out how telegram bots works, so I made this little bot that give you the definition of a word through inline commands.
+> It should return a list with the definition for the given word.
 
 ### Usage
 
