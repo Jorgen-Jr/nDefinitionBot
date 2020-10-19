@@ -17,8 +17,6 @@ bot.on('inline_query', async (query) => {
     try {
       const definitionThesaurus = await thedictapi.get('/thesaurus/' + queryContent).then(res => { return res.data });
 
-      console.log(definitionThesaurus);
-
       if (definitionThesaurus) {
         const definitionsThesaurus = definitionThesaurus.definition.map(def => {
           const all_definitions = def.definitions.map(def => {
@@ -50,7 +48,9 @@ bot.on('inline_query', async (query) => {
     try {
       const definitionsUrbanDictionary = await thedictapi.get('/urbandictionary/' + queryContent).then(res => { return res.data });
 
-      if (definitionsUrbanDictionary.length > 0) {
+      console.log(definitionsUrbanDictionary);
+      if (definitionsUrbanDictionary) {
+
         definitionsUrbanDictionary.forEach(definitionUrbanDictionary => {
           results.push({
             type: 'Article',
