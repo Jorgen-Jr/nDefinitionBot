@@ -44,34 +44,6 @@ bot.on('inline_query', async (query) => {
       console.log(error);
     }
 
-    //Catch the word from Urban Dictionary
-    try {
-      const definitionsUrbanDictionary = await thedictapi.get('/urbandictionary/' + queryContent).then(res => { return res.data });
-
-      console.log(definitionsUrbanDictionary);
-      if (definitionsUrbanDictionary) {
-
-        definitionsUrbanDictionary.forEach(definitionUrbanDictionary => {
-          results.push({
-            type: 'Article',
-            id: results.length,
-            title: "Urban Dictionary",
-            thumb_url: 'http://www.extension.zone/wp-content/uploads/2015/11/Urban-Dictionary-logo.png',
-            description: definitionUrbanDictionary.word.toUpperCase() + ' ' + definitionUrbanDictionary.definition,
-            input_message_content: {
-              parse_mode: 'HTML',
-              message_text: '<b><i>' + definitionUrbanDictionary.word + '</i></b> \n\n' +
-                '<b>Definition:</b> ' + definitionUrbanDictionary.definition + '\n\n' +
-                '<b>Example:</b> <i>' + definitionUrbanDictionary.examples + '</i> \n' +
-                '\n <a href="' + definitionUrbanDictionary.source + '">Source</a>'
-            },
-          });
-        });
-      }
-    } catch (error) {
-      console.log(error);
-    }
-
     // Catch the word from Priberam
     try {
       const definitionPriberam = await thedictapi.get('/priberam/' + queryContent).then(res => { return res.data });
@@ -103,6 +75,35 @@ bot.on('inline_query', async (query) => {
       console.log(error);
     }
   }
+
+  //Catch the word from Urban Dictionary
+  try {
+    const definitionsUrbanDictionary = await thedictapi.get('/urbandictionary/' + queryContent).then(res => { return res.data });
+
+    console.log(definitionsUrbanDictionary);
+    if (definitionsUrbanDictionary) {
+
+      definitionsUrbanDictionary.forEach(definitionUrbanDictionary => {
+        results.push({
+          type: 'Article',
+          id: results.length,
+          title: "Urban Dictionary",
+          thumb_url: 'http://www.extension.zone/wp-content/uploads/2015/11/Urban-Dictionary-logo.png',
+          description: definitionUrbanDictionary.word.toUpperCase() + ' ' + definitionUrbanDictionary.definition,
+          input_message_content: {
+            parse_mode: 'HTML',
+            message_text: '<b><i>' + definitionUrbanDictionary.word + '</i></b> \n\n' +
+              '<b>Definition:</b> ' + definitionUrbanDictionary.definition + '\n\n' +
+              '<b>Example:</b> <i>' + definitionUrbanDictionary.examples + '</i> \n' +
+              '\n <a href="' + definitionUrbanDictionary.source + '">Source</a>'
+          },
+        });
+      });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+
   bot.answerInlineQuery(queryId, results)
 });
 
