@@ -104,6 +104,20 @@ bot.on('inline_query', async (query) => {
     console.log(error);
   }
 
+  if (results.length <= 0) {
+    results.push({
+      type: 'Article',
+      id: results.length,
+      title: "Not Found",
+      thumb_url: 'https://muwado.com/wp-content/uploads/2014/06/sad-smiley-face.png',
+      description: ":(",
+      input_message_content: {
+        parse_mode: 'HTML',
+        message_text: ":("
+      },
+    });
+  }
+
   bot.answerInlineQuery(queryId, results)
 });
 
