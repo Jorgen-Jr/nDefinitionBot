@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 
-//Load all environment variables (Used in testing).
+//Load all environment variables (Used in testing and develop enviromnent).
 if (process.env.NODE_ENV !== "production") {
   if (process.env.NODE_ENV === "test") {
     dotenv.config({

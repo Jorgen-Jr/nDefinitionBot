@@ -22,6 +22,10 @@ if (token) {
     let results: InlineQueryResult[] = [];
 
     if (queryContent) {
+      console.log(
+        new Date().toUTCString() + " - Fetching word: " + queryContent
+      );
+
       //Catch the word from TheSaurus
       results.push(...(await ThesaurusController(queryContent)));
 
@@ -52,6 +56,7 @@ if (token) {
 
   // Listen for any kind of message.
   bot.on("message", async (msg: any) => {
+    console.log(new Date().toUTCString() + " - Tried using chat:", msg);
     const chatId = msg.chat.id;
 
     // send a message to the chat acknowledging receipt of their message
