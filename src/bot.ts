@@ -55,15 +55,43 @@ if (token) {
   });
 
   // Listen for any kind of message.
-  bot.on("message", async (msg: any) => {
-    console.log(new Date().toUTCString() + " - Tried using chat:", msg);
+  bot.on("message", async (msg: TelegramBot.Message) => {
     const chatId = msg.chat.id;
+    const content = msg.text;
+
+    let results: InlineQueryResult[] = [];
+
+    if (content) {
+      console.log(new Date().toUTCString() + " - Fetching word: " + content);
+
+      //Catch the word from TheSaurus
+      results.push(...(await ThesaurusController(content)));
+
+      //Fetch results from Priberam
+      results.push(...(await PriberamController(content)));
+
+      //Catch the word from Urban Dictionary
+      results.push(...(await UrbanDictionaryController(content)));
+    }
+
+    if (results.length === 0) {
+      // send a message in case it doesn't find anything.
+      bot?.sendMessage(
+        chatId,
+        "Sorry, coudn't catch that 😢 \nPlease use only inline commands for now."
+      );
+    }
 
     // send a message to the chat acknowledging receipt of their message
-    bot?.sendMessage(
-      chatId,
-      "Sorry, coudn't catch that 😢 \nPlease use only inline commands for now."
-    );
+    const parse_mode: any = { parse_mode: "HTML" };
+
+    results.forEach((result: InlineQueryResult) => {
+      bot?.sendMessage(
+        chatId,
+        result.input_message_content.message_text,
+        parse_mode
+      );
+    });
   });
 }
 
