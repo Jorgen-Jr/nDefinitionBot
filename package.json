@@ -12,7 +12,7 @@
     "watch": "tsc -w",
     "dev": "nodemon src/server.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "deployhomolog": "cp /home/jorge-n/Documentos/workspace-react/nDefinitionBot/nDefinitionBot/src/ ~/Documentos/workspace-react/nDefinitionBot/nDefinitionBot/*.json /home/jorge-n/Documentos/Projetos/nTelegram/nDefinitionBot -r",
+    "deployhomolog": "cp /home/jorge-n/Documentos/workspace/nDefinitionBot/nDefinitionBot/src/ ~/Documentos/workspace/nDefinitionBot/nDefinitionBot/*.json /home/jorge-n/Documentos/Projetos/nTelegram/nDefinitionBot -r",
     "postdeployhomolog": "sudo docker container restart nDefinitionBot"
   },
   "author": "Jorge Antônio da Silva Nascimento Junior",
