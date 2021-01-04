@@ -143,7 +143,7 @@ exports.handler = async event => {
             Answer said query.
         */
 
-        await botapi.default.post('/answerInlineQuery', response);
+        botapi.default.post('/answerInlineQuery', response);
 
     } else if (message) {
         const chatId = message.chat.id;
@@ -161,7 +161,7 @@ exports.handler = async event => {
         if (results.length === 0) {
             // send a message in case it doesn't find anything.
 
-            await botapi.default().post('/sendMessage', {
+            botapi.default().post('/sendMessage', {
                 chatId,
                 text: "Sorry, coudn't catch that 😢 \nPlease use only inline commands for now.",
                 parse_mode
@@ -170,18 +170,11 @@ exports.handler = async event => {
 
 
         results.forEach((result) => {
-
-            await botapi.default.post('/sendMessage', {
+            botapi.default.post('/sendMessage', {
                 chatId,
                 text: result.input_message_content.message_text,
                 parse_mode
             });
-
-            telegram.sendMessage(
-                chatId,
-                result.input_message_content.message_text,
-                parse_mode
-            );
         });
     }
 
