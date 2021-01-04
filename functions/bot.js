@@ -95,27 +95,32 @@ exports.handler = async event => {
     console.log("inline_query object: ", req.inline_query);
     console.log("message received: ", req.message);
 
+    let word = "";
+
     if (inline_query) {
-        const queryContent =
-            inline_query.query.replace(" ", "%20") || (await getRandomWord.default());
+        word = inline_query.query.replace(" ", "%20") || (await getRandomWord.default());
+    } else if (message) {
+        word = message.text;
+    }
 
-        let results = [];
+    let results = [];
 
-        if (queryContent) {
-            console.log(
-                new Date().toUTCString() + " - Fetching word: " + queryContent
-            );
+    if (word) {
+        console.log(
+            new Date().toUTCString() + " - Fetching word: " + word
+        );
 
-            //Catch the word from TheSaurus
-            results.push(...(await ThesaurusController.default(queryContent)));
+        //Catch the word from TheSaurus
+        results.push(...(await ThesaurusController.default(word)));
 
-            //Fetch results from Priberam
-            results.push(...(await PriberamController.default(queryContent)));
+        //Fetch results from Priberam
+        results.push(...(await PriberamController.default(word)));
 
-            //Catch the word from Urban Dictionary
-            results.push(...(await UrbanDictionaryController.default(queryContent)));
-        }
+        //Catch the word from Urban Dictionary
+        results.push(...(await UrbanDictionaryController.default(word)));
+    }
 
+    if (inline_query) {
         if (results.length === 0) {
             results.push({
                 type: "Article",
@@ -135,7 +140,29 @@ exports.handler = async event => {
         response = results;
 
     } else if (message) {
+        const chatId = message.chat.id;
 
+        console.log(chatId, results);
+
+        /* WIP Sending messages back as result. */
+        // if (results.length === 0) {
+        //     // send a message in case it doesn't find anything.
+        //     bot?.sendMessage(
+        //         chatId,
+        //         "Sorry, coudn't catch that 😢 \nPlease use only inline commands for now."
+        //     );
+        // }
+
+        // // send a message to the chat acknowledging receipt of their message
+        // const parse_mode = { parse_mode: "HTML" };
+
+        // results.forEach((result) => {
+        //     telegram.sendMessage(
+        //         chatId,
+        //         result.input_message_content.message_text,
+        //         parse_mode
+        //     );
+        // });
     }
 
     return {
