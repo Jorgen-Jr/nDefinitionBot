@@ -138,7 +138,8 @@ exports.handler = async event => {
 
             console.log("Response generated: ", res.data);
 
-        } else if (message) {
+        }
+        if (message) {
             const chatId = message.chat.id;
 
             /* Answer message. */
@@ -154,7 +155,7 @@ exports.handler = async event => {
                     parse_mode,
                 }
 
-                const res = sendMessage(response);
+                const res = await sendMessage(response);
                 console.log("Response generated: ", res.data);
             }
 
