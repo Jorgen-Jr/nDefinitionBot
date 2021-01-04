@@ -71,6 +71,8 @@ exports.handler = async event => {
 
     const body = event.body;
 
+    const req = JSON.parse(body);
+
     const {
         update_id,
         message,
@@ -84,14 +86,14 @@ exports.handler = async event => {
         pre_checkout_query,
         poll,
         poll_answer,
-    } = body;
+    } = req;
 
     let response = {};
 
-    console.log('Update received: ', body);
+    console.log('Update received: ', body, req);
 
-    console.log("inline_query object: ", body.inline_query);
-    console.log("message received: ", body.message);
+    console.log("inline_query object: ", req.inline_query);
+    console.log("message received: ", req.message);
 
     if (inline_query) {
         const queryContent =
