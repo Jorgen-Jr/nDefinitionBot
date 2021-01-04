@@ -66,7 +66,8 @@ const PriberamController = require("../dist/controllers/PriberamController");
 const UrbanDictionaryController = require("../dist/controllers/UrbanDictionaryController");
 
 exports.handler = async event => {
-    const body = JSON.parse(event.body);
+
+    const body = event.body;
 
     // const {
     //     update_id,
