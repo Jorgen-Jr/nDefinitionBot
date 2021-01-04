@@ -136,7 +136,10 @@ exports.handler = async event => {
         }
 
         /* Answer said query. */
-
+        response = {
+            inline_query_id: inline_query.id,
+            results,
+        }
         await axios.post(bot_url + '/answerInlineQuery', response);
 
     } else if (message) {
@@ -163,7 +166,7 @@ exports.handler = async event => {
 
         async function sendMessage(text) {
             await axios.post(bot_url + '/sendMessage', {
-                chatId,
+                chat_id: chatId,
                 text,
                 parse_mode
             });
