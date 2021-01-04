@@ -88,39 +88,34 @@ exports.handler = async event => {
         // poll_answer,
     } = req;
 
+    let response = {};
+
     console.log('Update received: ', body, req);
 
     console.log("inline_query object: ", req.inline_query);
     console.log("message received: ", req.message);
 
-    let word = "";
-
     if (inline_query) {
-        word = inline_query.query.replace(" ", "%20") || (await getRandomWord.default());
-    } else if (message) {
-        word = message.text;
-    }
+        const queryContent =
+            inline_query.query.replace(" ", "%20") || (await getRandomWord.default());
 
-    let results = [];
+        let results = [];
 
-    if (word) {
-        console.log(
-            new Date().toUTCString() + " - Fetching word: " + word
-        );
+        if (queryContent) {
+            console.log(
+                new Date().toUTCString() + " - Fetching word: " + queryContent
+            );
 
-        //Catch the word from TheSaurus
-        results.push(...(await ThesaurusController.default(word)));
+            //Catch the word from TheSaurus
+            results.push(...(await ThesaurusController.default(queryContent)));
 
-        //Fetch results from Priberam
-        results.push(...(await PriberamController.default(word)));
+            //Fetch results from Priberam
+            results.push(...(await PriberamController.default(queryContent)));
 
-        //Catch the word from Urban Dictionary
-        results.push(...(await UrbanDictionaryController.default(word)));
-    }
+            //Catch the word from Urban Dictionary
+            results.push(...(await UrbanDictionaryController.default(queryContent)));
+        }
 
-    console.log(results);
-
-    if (inline_query) {
         if (results.length === 0) {
             results.push({
                 type: "Article",
@@ -136,38 +131,17 @@ exports.handler = async event => {
             });
         }
 
-        console.log("Response generated: ", results);
+        console.log("Response generated: ", response);
+        response = results;
 
     } else if (message) {
-        const chatId = message.chat.id;
 
-        console.log(chatId, results);
-
-        /* WIP Sending messages back as result. */
-        // if (results.length === 0) {
-        //     // send a message in case it doesn't find anything.
-        //     bot?.sendMessage(
-        //         chatId,
-        //         "Sorry, coudn't catch that 😢 \nPlease use only inline commands for now."
-        //     );
-        // }
-
-        // // send a message to the chat acknowledging receipt of their message
-        // const parse_mode = { parse_mode: "HTML" };
-
-        // results.forEach((result) => {
-        //     telegram.sendMessage(
-        //         chatId,
-        //         result.input_message_content.message_text,
-        //         parse_mode
-        //     );
-        // });
     }
 
     return {
         statusCode: 200,
 
-        body: JSON.stringify(results),
+        body: JSON.stringify(response),
     }
 
 }
