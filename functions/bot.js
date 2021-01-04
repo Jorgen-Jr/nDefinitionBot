@@ -95,6 +95,8 @@ exports.handler = async event => {
     console.log("inline_query object: ", req.inline_query);
     console.log("message received: ", req.message);
 
+    console.log(process.env);
+
     let response = {};
 
     let word = "";
