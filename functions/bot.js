@@ -97,7 +97,7 @@ exports.handler = async event => {
 
     if (inline_query) {
         const queryContent =
-            inline_query.query.replace(" ", "%20") || (await getRandomWord());
+            inline_query.query.replace(" ", "%20") || (await getRandomWord.default());
 
         let results = [];
 
@@ -107,13 +107,13 @@ exports.handler = async event => {
             );
 
             //Catch the word from TheSaurus
-            results.push(...(await ThesaurusController(queryContent)));
+            results.push(...(await ThesaurusController.default(queryContent)));
 
             //Fetch results from Priberam
-            results.push(...(await PriberamController(queryContent)));
+            results.push(...(await PriberamController.default(queryContent)));
 
             //Catch the word from Urban Dictionary
-            results.push(...(await UrbanDictionaryController(queryContent)));
+            results.push(...(await UrbanDictionaryController.default(queryContent)));
         }
 
         if (results.length === 0) {
