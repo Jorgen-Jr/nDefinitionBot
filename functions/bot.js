@@ -130,43 +130,45 @@ exports.handler = async event => {
             });
         }
 
-        /* Answer said query. */
+        /* Answer said inline query. */
         response = {
             inline_query_id: inline_query.id,
             results,
         };
 
-        await axios.post(bot_url + '/answerInlineQuery', response);
-
         console.log("Response generated: ", response);
+
+        answerInlineQuery(response);
 
     } else if (message) {
         const chatId = message.chat.id;
 
-        /* 
-            Answer message.
-        */
+        /* Answer message. */
 
         // send a message to the chat acknowledging receipt of their message
         const parse_mode = { parse_mode: "HTML" };
 
         if (results.length === 0) {
             // send a message in case it doesn't find anything.
-            sendMessage("Sorry, coudn't catch that 😢 \nPlease use only inline commands for now.")
+            response = {
+                chat_id: chatId,
+                text: "Sorry, coudn't catch that 😢 \nPlease use only inline commands for now",
+                parse_mode,
+            }
+
+            sendMessage(response);
         }
 
 
         results.forEach((result) => {
-            sendMessage(result.input_message_content.message_text);
+            let response = {
+                chat_id: chatId,
+                text: result.input_message_content.message_text,
+                parse_mode,
+            }
+            sendMessage(response);
         });
 
-        async function sendMessage(text) {
-            await axios.post(bot_url + '/sendMessage', {
-                chat_id: chatId,
-                text,
-                parse_mode
-            });
-        }
 
         response = {
             chat_id: chatId,
@@ -174,6 +176,14 @@ exports.handler = async event => {
         };
 
         console.log("Response generated: ", response);
+    }
+
+    async function sendMessage(response) {
+        await axios.post(bot_url + '/sendMessage', response);
+    }
+
+    async function answerInlineQuery(response) {
+        await axios.post(bot_url + '/answerInlineQuery', response);
     }
 
     return {
