@@ -79,56 +79,56 @@ exports.handler = async event => {
         pre_checkout_query,
         poll,
         poll_answer,
-    } = event.body;
+    } = JSON.parse(event).body;
 
     let response = {};
 
-    // if (inline_query) {
-    //     const queryContent =
-    //         inline_query.query.replace(" ", "%20") || (await getRandomWord());
+    if (inline_query) {
+        const queryContent =
+            inline_query.query.replace(" ", "%20") || (await getRandomWord());
 
-    //     let results = [];
+        let results = [];
 
-    //     if (queryContent) {
-    //         console.log(
-    //             new Date().toUTCString() + " - Fetching word: " + queryContent
-    //         );
+        if (queryContent) {
+            console.log(
+                new Date().toUTCString() + " - Fetching word: " + queryContent
+            );
 
-    //         //Catch the word from TheSaurus
-    //         results.push(...(await ThesaurusController(queryContent)));
+            //Catch the word from TheSaurus
+            results.push(...(await ThesaurusController(queryContent)));
 
-    //         //Fetch results from Priberam
-    //         results.push(...(await PriberamController(queryContent)));
+            //Fetch results from Priberam
+            results.push(...(await PriberamController(queryContent)));
 
-    //         //Catch the word from Urban Dictionary
-    //         results.push(...(await UrbanDictionaryController(queryContent)));
-    //     }
+            //Catch the word from Urban Dictionary
+            results.push(...(await UrbanDictionaryController(queryContent)));
+        }
 
-    //     if (results.length === 0) {
-    //         results.push({
-    //             type: "Article",
-    //             id: "404_" + results.length,
-    //             title: "Not Found",
-    //             thumb_url:
-    //                 "https://muwado.com/wp-content/uploads/2014/06/sad-smiley-face.png",
-    //             description: ":(",
-    //             input_message_content: {
-    //                 parse_mode: "HTML",
-    //                 message_text: ":(",
-    //             },
-    //         });
-    //     }
+        if (results.length === 0) {
+            results.push({
+                type: "Article",
+                id: "404_" + results.length,
+                title: "Not Found",
+                thumb_url:
+                    "https://muwado.com/wp-content/uploads/2014/06/sad-smiley-face.png",
+                description: ":(",
+                input_message_content: {
+                    parse_mode: "HTML",
+                    message_text: ":(",
+                },
+            });
+        }
 
-    //     response = results;
+        response = results;
 
-    // } else if (message) {
+    } else if (message) {
 
-    // }
+    }
 
     return {
         statusCode: 200,
 
-        body: JSON.stringify(event.body, event),
+        body: JSON.stringify(response),
     }
 
 }
