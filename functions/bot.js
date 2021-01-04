@@ -67,6 +67,8 @@ const UrbanDictionaryController = require("../dist/controllers/UrbanDictionaryCo
 
 const getRandomWord = require("../dist/util/getRandomWord");
 
+const botapi = require('../dist/services/botapi');
+
 exports.handler = async event => {
 
     const body = event.body;
@@ -137,30 +139,50 @@ exports.handler = async event => {
         }
 
 
+        /* 
+            Answer said query.
+        */
+
+        await botapi.default().post('/answerInlineQuery', response);
+
     } else if (message) {
         const chatId = message.chat.id;
 
         console.log(chatId, results);
 
-        /* WIP Sending messages back as result. */
-        // if (results.length === 0) {
-        //     // send a message in case it doesn't find anything.
-        //     bot?.sendMessage(
-        //         chatId,
-        //         "Sorry, coudn't catch that 😢 \nPlease use only inline commands for now."
-        //     );
-        // }
 
-        // // send a message to the chat acknowledging receipt of their message
-        // const parse_mode = { parse_mode: "HTML" };
+        /* 
+            Answer message.
+        */
 
-        // results.forEach((result) => {
-        //     telegram.sendMessage(
-        //         chatId,
-        //         result.input_message_content.message_text,
-        //         parse_mode
-        //     );
-        // });
+        // send a message to the chat acknowledging receipt of their message
+        const parse_mode = { parse_mode: "HTML" };
+
+        if (results.length === 0) {
+            // send a message in case it doesn't find anything.
+
+            await botapi.default().post('/sendMessage', {
+                chatId,
+                text: "Sorry, coudn't catch that 😢 \nPlease use only inline commands for now.",
+                parse_mode
+            });
+        }
+
+
+        results.forEach((result) => {
+
+            await botapi.default().post('/sendMessage', {
+                chatId,
+                text: result.input_message_content.message_text,
+                parse_mode
+            });
+
+            telegram.sendMessage(
+                chatId,
+                result.input_message_content.message_text,
+                parse_mode
+            );
+        });
     }
 
     response = {
