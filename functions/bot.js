@@ -88,6 +88,11 @@ exports.handler = async event => {
 
     let response = {};
 
+    console.log('Update received: ', body);
+
+    console.log("inline_query object: ", body.inline_query);
+    console.log("message received: ", body.message);
+
     if (inline_query) {
         const queryContent =
             inline_query.query.replace(" ", "%20") || (await getRandomWord());
@@ -124,6 +129,7 @@ exports.handler = async event => {
             });
         }
 
+        console.log("Response generated: ", response);
         response = results;
 
     } else if (message) {
