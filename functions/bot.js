@@ -61,9 +61,9 @@ for inline queries or
 Let's get to it.
 */
 
-const ThesaurusController = require("./dist/controllers/ThesaurusController");
-const PriberamController = require("./dist/controllers/PriberamController");
-const UrbanDictionaryController = require("./dist/controllers/UrbanDictionaryController");
+const ThesaurusController = require("../dist/controllers/ThesaurusController");
+const PriberamController = require("../dist/controllers/PriberamController");
+const UrbanDictionaryController = require("../dist/controllers/UrbanDictionaryController");
 
 exports.handler = async event => {
     const {
