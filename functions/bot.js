@@ -145,7 +145,7 @@ exports.handler = async event => {
             /* Answer message. */
 
             // send a message to the chat acknowledging receipt of their message
-            const parse_mode = { parse_mode: "HTML" };
+            const parse_mode = "HTML";
 
             if (results.length === 0) {
                 // send a message in case it doesn't find anything.
