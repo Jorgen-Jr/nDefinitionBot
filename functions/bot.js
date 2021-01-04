@@ -74,7 +74,7 @@ exports.handler = async event => {
     const req = JSON.parse(body);
 
     const {
-        update_id,
+        // update_id,
         message,
         // edited_message,
         // channel_post,
@@ -164,7 +164,7 @@ exports.handler = async event => {
     }
 
     response = {
-        inline_query_id: update_id,
+        inline_query_id: inline_query.id,
         results
     }
 
