@@ -77,7 +77,6 @@ exports.handler = async event => {
     const req = JSON.parse(body);
 
     const {
-        update_id,
         message,
         inline_query,
     } = req;
@@ -170,7 +169,7 @@ exports.handler = async event => {
         }
 
         response = {
-            chat_id, chatId,
+            chat_id: chatId,
             results,
         };
 
