@@ -88,8 +88,6 @@ exports.handler = async event => {
         poll_answer,
     } = req;
 
-    let response = {};
-
     console.log('Update received: ', body, req);
 
     console.log("inline_query object: ", req.inline_query);
@@ -120,6 +118,8 @@ exports.handler = async event => {
         results.push(...(await UrbanDictionaryController.default(word)));
     }
 
+    console.log(results);
+
     if (inline_query) {
         if (results.length === 0) {
             results.push({
@@ -136,8 +136,7 @@ exports.handler = async event => {
             });
         }
 
-        console.log("Response generated: ", response);
-        response = results;
+        console.log("Response generated: ", results);
 
     } else if (message) {
         const chatId = message.chat.id;
@@ -168,7 +167,7 @@ exports.handler = async event => {
     return {
         statusCode: 200,
 
-        body: JSON.stringify(response),
+        body: JSON.stringify(results),
     }
 
 }
