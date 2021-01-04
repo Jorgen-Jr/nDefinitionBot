@@ -179,11 +179,11 @@ exports.handler = async event => {
     }
 
     async function sendMessage(response) {
-        await axios.post(bot_url + '/sendMessage', response);
+        return await axios.post(bot_url + '/sendMessage', response);
     }
 
     async function answerInlineQuery(response) {
-        await axios.post(bot_url + '/answerInlineQuery', response);
+        return await axios.post(bot_url + '/answerInlineQuery', response);
     }
 
     return {
