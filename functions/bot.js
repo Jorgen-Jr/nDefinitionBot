@@ -74,7 +74,7 @@ exports.handler = async event => {
     const req = JSON.parse(body);
 
     const {
-        // update_id,
+        update_id,
         message,
         // edited_message,
         // channel_post,
@@ -118,25 +118,22 @@ exports.handler = async event => {
         results.push(...(await UrbanDictionaryController.default(word)));
     }
 
-    console.log(results);
-
     if (inline_query) {
-        // if (results.length === 0) {
-        results.push({
-            type: "Article",
-            id: "404_" + results.length,
-            title: "Not Found",
-            thumb_url:
-                "https://muwado.com/wp-content/uploads/2014/06/sad-smiley-face.png",
-            description: ":(",
-            input_message_content: {
-                parse_mode: "HTML",
-                message_text: ":(",
-            },
-        });
-        // }
+        if (results.length === 0) {
+            results.push({
+                type: "Article",
+                id: "404_" + results.length,
+                title: "Not Found",
+                thumb_url:
+                    "https://muwado.com/wp-content/uploads/2014/06/sad-smiley-face.png",
+                description: ":(",
+                input_message_content: {
+                    parse_mode: "HTML",
+                    message_text: ":(",
+                },
+            });
+        }
 
-        console.log("Response generated: ", results);
 
     } else if (message) {
         const chatId = message.chat.id;
@@ -163,6 +160,11 @@ exports.handler = async event => {
         //     );
         // });
     }
+
+    console.log("Response generated: ", {
+        inline_query_id: update_id,
+        results,
+    });
 
     return {
         statusCode: 200,
