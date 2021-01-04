@@ -67,7 +67,7 @@ const UrbanDictionaryController = require("../dist/controllers/UrbanDictionaryCo
 
 const getRandomWord = require("../dist/util/getRandomWord");
 
-const botapi = require('../dist/services/botapi');
+const axios = require('axios');
 
 exports.handler = async event => {
 
@@ -76,26 +76,20 @@ exports.handler = async event => {
     const req = JSON.parse(body);
 
     const {
-        // update_id,
+        update_id,
         message,
-        // edited_message,
-        // channel_post,
-        // edited_channel_post,
         inline_query,
-        // chosen_inline_result,
-        // callback_query,
-        // shipping_query,
-        // pre_checkout_query,
-        // poll,
-        // poll_answer,
     } = req;
 
-    console.log('Update received: ', body, req);
+    console.log('Update received: ', req);
 
     console.log("inline_query object: ", req.inline_query);
+
     console.log("message received: ", req.message);
 
-    console.log('bot token ' + process.env.BOT_TOKEN);
+    const bot_url = "https://api.telegram.org/bot" + process.env.BOT_TOKEN;
+
+    console.log('BOT endpoint: ' + bot_url);
 
     let response = {};
 
@@ -140,18 +134,14 @@ exports.handler = async event => {
             });
         }
 
+        /* Answer said query. */
 
-        /* 
-            Answer said query.
-        */
-
-        botapi.default.post('/answerInlineQuery', response);
+        await axios.post(bot_url + '/answerInlineQuery', response);
 
     } else if (message) {
         const chatId = message.chat.id;
 
         console.log(chatId, results);
-
 
         /* 
             Answer message.
@@ -163,7 +153,7 @@ exports.handler = async event => {
         if (results.length === 0) {
             // send a message in case it doesn't find anything.
 
-            botapi.default().post('/sendMessage', {
+            await axios.post(bot_url + '/sendMessage', {
                 chatId,
                 text: "Sorry, coudn't catch that 😢 \nPlease use only inline commands for now.",
                 parse_mode
@@ -172,7 +162,7 @@ exports.handler = async event => {
 
 
         results.forEach((result) => {
-            botapi.default.post('/sendMessage', {
+            await axios.post(bot_url + '/sendMessage', {
                 chatId,
                 text: result.input_message_content.message_text,
                 parse_mode
@@ -181,7 +171,7 @@ exports.handler = async event => {
     }
 
     response = {
-        inline_query_id: inline_query.id,
+        update_id,
         results
     }
 
