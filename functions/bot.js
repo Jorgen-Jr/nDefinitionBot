@@ -68,6 +68,7 @@ const UrbanDictionaryController = require("../dist/controllers/UrbanDictionaryCo
 const getRandomWord = require("../dist/util/getRandomWord");
 
 const axios = require('axios');
+const { parse } = require("ts-node");
 
 exports.handler = async event => {
 
@@ -152,22 +153,21 @@ exports.handler = async event => {
 
         if (results.length === 0) {
             // send a message in case it doesn't find anything.
-
-            await axios.post(bot_url + '/sendMessage', {
-                chatId,
-                text: "Sorry, coudn't catch that 😢 \nPlease use only inline commands for now.",
-                parse_mode
-            });
+            sendMessage("Sorry, coudn't catch that 😢 \nPlease use only inline commands for now.")
         }
 
 
         results.forEach((result) => {
+            sendMessage(result.input_message_content.message_text);
+        });
+
+        async function sendMessage(text) {
             await axios.post(bot_url + '/sendMessage', {
                 chatId,
-                text: result.input_message_content.message_text,
+                text,
                 parse_mode
             });
-        });
+        }
     }
 
     response = {
