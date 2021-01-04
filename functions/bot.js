@@ -90,12 +90,14 @@ exports.handler = async event => {
         // poll_answer,
     } = req;
 
+    const token = process.env.BOT_TOKEN;
+
     console.log('Update received: ', body, req);
 
     console.log("inline_query object: ", req.inline_query);
     console.log("message received: ", req.message);
 
-    console.log(process.env);
+    console.log('bot token: ', process.env.BOT_TOKEN);
 
     let response = {};
 
@@ -145,7 +147,7 @@ exports.handler = async event => {
             Answer said query.
         */
 
-        botapi.default.post('/answerInlineQuery', response);
+        botapi.default.post(token + '/answerInlineQuery', response);
 
     } else if (message) {
         const chatId = message.chat.id;
@@ -163,7 +165,7 @@ exports.handler = async event => {
         if (results.length === 0) {
             // send a message in case it doesn't find anything.
 
-            botapi.default().post('/sendMessage', {
+            botapi.default.post(token + '/sendMessage', {
                 chatId,
                 text: "Sorry, coudn't catch that 😢 \nPlease use only inline commands for now.",
                 parse_mode
@@ -172,7 +174,7 @@ exports.handler = async event => {
 
 
         results.forEach((result) => {
-            botapi.default.post('/sendMessage', {
+            botapi.default.post(token + '/sendMessage', {
                 chatId,
                 text: result.input_message_content.message_text,
                 parse_mode
