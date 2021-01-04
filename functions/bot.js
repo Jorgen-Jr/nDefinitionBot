@@ -65,6 +65,8 @@ const ThesaurusController = require("../dist/controllers/ThesaurusController");
 const PriberamController = require("../dist/controllers/PriberamController");
 const UrbanDictionaryController = require("../dist/controllers/UrbanDictionaryController");
 
+const getRandomWord = require("../dist/util/getRandomWord");
+
 exports.handler = async event => {
 
     const body = event.body;
