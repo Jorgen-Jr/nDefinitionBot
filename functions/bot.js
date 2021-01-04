@@ -66,20 +66,20 @@ const PriberamController = require("../dist/controllers/PriberamController");
 const UrbanDictionaryController = require("../dist/controllers/UrbanDictionaryController");
 
 exports.handler = async event => {
-    const {
-        update_id,
-        message,
-        edited_message,
-        channel_post,
-        edited_channel_post,
-        inline_query,
-        chosen_inline_result,
-        callback_query,
-        shipping_query,
-        pre_checkout_query,
-        poll,
-        poll_answer,
-    } = JSON.parse(event.body);
+    // const {
+    //     update_id,
+    //     message,
+    //     edited_message,
+    //     channel_post,
+    //     edited_channel_post,
+    //     inline_query,
+    //     chosen_inline_result,
+    //     callback_query,
+    //     shipping_query,
+    //     pre_checkout_query,
+    //     poll,
+    //     poll_answer,
+    // } = JSON.parse(event.body);
 
     let response = {};
 
@@ -128,7 +128,7 @@ exports.handler = async event => {
     return {
         statusCode: 200,
 
-        body: JSON.stringify(response, event),
+        body: event,
     }
 
 }
