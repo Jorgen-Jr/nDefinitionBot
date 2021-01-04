@@ -93,6 +93,8 @@ exports.handler = async event => {
     console.log("inline_query object: ", req.inline_query);
     console.log("message received: ", req.message);
 
+    let response = {};
+
     let word = "";
 
     if (inline_query) {
@@ -161,10 +163,12 @@ exports.handler = async event => {
         // });
     }
 
-    console.log("Response generated: ", {
+    response = {
         inline_query_id: update_id,
-        results,
-    });
+        results
+    }
+
+    console.log("Response generated: ", response);
 
     return {
         statusCode: 200,
