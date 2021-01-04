@@ -128,7 +128,7 @@ exports.handler = async event => {
     return {
         statusCode: 200,
 
-        body: JSON.stringify(response),
+        body: JSON.stringify(response, event.body),
     }
 
 }
