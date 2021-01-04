@@ -136,9 +136,9 @@ exports.handler = async event => {
             results,
         };
 
-        console.log("Response generated: ", response);
+        const res = await answerInlineQuery(response);
 
-        answerInlineQuery(response);
+        console.log("Response generated: ", res);
 
     } else if (message) {
         const chatId = message.chat.id;
@@ -156,17 +156,19 @@ exports.handler = async event => {
                 parse_mode,
             }
 
-            sendMessage(response);
+            const res = sendMessage(response);
+            console.log("Response generated: ", res);
         }
 
 
-        results.forEach((result) => {
+        results.forEach(async (result) => {
             let response = {
                 chat_id: chatId,
                 text: result.input_message_content.message_text,
                 parse_mode,
             }
-            sendMessage(response);
+            const res = await sendMessage(response);
+            console.log('Response generated: ', res)
         });
 
 
@@ -174,8 +176,6 @@ exports.handler = async event => {
             chat_id: chatId,
             results,
         };
-
-        console.log("Response generated: ", response);
     }
 
     async function sendMessage(response) {
