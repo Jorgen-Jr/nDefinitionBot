@@ -84,10 +84,6 @@ exports.handler = async event => {
 
     console.log('Update received: ', req);
 
-    console.log("inline_query object: ", req.inline_query);
-
-    console.log("message received: ", req.message);
-
     const bot_url = "https://api.telegram.org/bot" + process.env.BOT_TOKEN;
 
     console.log('BOT endpoint: ' + bot_url);
@@ -139,13 +135,14 @@ exports.handler = async event => {
         response = {
             inline_query_id: inline_query.id,
             results,
-        }
+        };
+
         await axios.post(bot_url + '/answerInlineQuery', response);
+
+        console.log("Response generated: ", response);
 
     } else if (message) {
         const chatId = message.chat.id;
-
-        console.log(chatId, results);
 
         /* 
             Answer message.
@@ -171,14 +168,14 @@ exports.handler = async event => {
                 parse_mode
             });
         }
-    }
 
-    response = {
-        update_id,
-        results
-    }
+        response = {
+            chat_id, chatId,
+            results,
+        };
 
-    console.log("Response generated: ", response);
+        console.log("Response generated: ", response);
+    }
 
     return {
         statusCode: 200,
