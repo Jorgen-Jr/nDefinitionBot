@@ -143,7 +143,7 @@ exports.handler = async event => {
             Answer said query.
         */
 
-        await botapi.default().post('/answerInlineQuery', response);
+        await botapi.default.post('/answerInlineQuery', response);
 
     } else if (message) {
         const chatId = message.chat.id;
@@ -171,7 +171,7 @@ exports.handler = async event => {
 
         results.forEach((result) => {
 
-            await botapi.default().post('/sendMessage', {
+            await botapi.default.post('/sendMessage', {
                 chatId,
                 text: result.input_message_content.message_text,
                 parse_mode
