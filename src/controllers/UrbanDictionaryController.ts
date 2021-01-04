@@ -6,7 +6,7 @@ export default async (word: string) => {
   let results: InlineQueryResult[] = [];
 
   const definitionsUrbanDictionary = await thedictapi
-    .get("/urbandictionary/" + word)
+    .get("/urbandictionary?word=" + word)
     .then((res) => {
       return res.data;
     });

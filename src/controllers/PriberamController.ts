@@ -5,7 +5,7 @@ export default async (word: string) => {
   let results: InlineQueryResult[] = [];
 
   const definitionPriberam = await thedictapi
-    .get("/priberam/" + word)
+    .get("/priberam?word=" + word)
     .then((res) => {
       return res.data;
     });

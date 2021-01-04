@@ -5,7 +5,7 @@ export default async (word: string) => {
   let results: InlineQueryResult[] = [];
 
   const definitionThesaurus = await thedictapi
-    .get("/thesaurus/" + word)
+    .get("/thesaurus?word=" + word)
     .then((res) => {
       return res.data;
     });
