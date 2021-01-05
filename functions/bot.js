@@ -67,6 +67,8 @@ const UrbanDictionaryController = require("../dist/controllers/UrbanDictionaryCo
 
 const getRandomWord = require("../dist/util/getRandomWord");
 
+const axios = require('axios');
+
 exports.handler = async event => {
 
     const body = event.body;
@@ -179,11 +181,11 @@ exports.handler = async event => {
     }
 
     async function sendMessage(response) {
-        return await axios.post('./sendMessage', response);
+        return await axios.post('https://ndefinition.netlify.app/.netlify/functions/answerInlineQuery', response);
     }
 
     async function answerInlineQuery(response) {
-        return await axios.post('./answerInlineQuery', response);
+        return await axios.post('https://ndefinition.netlify.app/.netlify/functions/answerInlineQuery', response);
     }
 
     return {
