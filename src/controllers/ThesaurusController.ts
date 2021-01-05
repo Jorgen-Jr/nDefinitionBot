@@ -48,7 +48,7 @@ export default async (word: string) => {
           },
         });
       } catch (err) {
-        console.log("Houston? We got an issue at Thesaurus.", err);
+        console.error("Houston? We got an issue at Thesaurus.", err);
       }
     }
   }
