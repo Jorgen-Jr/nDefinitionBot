@@ -67,9 +67,6 @@ const UrbanDictionaryController = require("../dist/controllers/UrbanDictionaryCo
 
 const getRandomWord = require("../dist/util/getRandomWord");
 
-const axios = require('axios');
-const { parse } = require("ts-node");
-
 exports.handler = async event => {
 
     const body = event.body;
@@ -139,7 +136,7 @@ exports.handler = async event => {
             console.log("Response generated: ", res.data);
 
         }
-        if (message) {
+        else if (message) {
             const chatId = message.chat.id;
 
             /* Answer message. */
@@ -182,11 +179,11 @@ exports.handler = async event => {
     }
 
     async function sendMessage(response) {
-        return await axios.post(bot_url + '/sendMessage', response);
+        return await axios.post('./sendMessage', response);
     }
 
     async function answerInlineQuery(response) {
-        return await axios.post(bot_url + '/answerInlineQuery', response);
+        return await axios.post('./answerInlineQuery', response);
     }
 
     return {
