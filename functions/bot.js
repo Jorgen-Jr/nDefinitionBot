@@ -185,7 +185,7 @@ exports.handler = async event => {
     }
 
     async function answerInlineQuery(response) {
-        return await axios.post('https://ndefinition.netlify.app/.netlify/functions/answerInlineQuery', response);
+        return await axios.post('https://ndefinition.netlify.app/.netlify/functions/sendMessage', response);
     }
 
     return {
