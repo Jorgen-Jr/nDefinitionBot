@@ -91,7 +91,7 @@ exports.handler = async event => {
     let word = "";
 
     if (inline_query) {
-        word = inline_query.query.replace(" ", "%20") || (await getRandomWord.default());
+        word = inline_query.query || (await getRandomWord.default());
     } else if (message) {
         word = message.text;
     }
