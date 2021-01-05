@@ -10,9 +10,9 @@ export default async (word: string) => {
       return res.data;
     });
 
-  if (definitionThesaurus) {
-    if (definitionThesaurus.definition) {
-      if (definitionThesaurus.definition.length > 0) {
+  if (definitionThesaurus.definition) {
+    if (definitionThesaurus.definition.length > 0) {
+      try {
         const definitionsThesaurus = definitionThesaurus.definition.map(
           (def: DefinitionObject) => {
             const all_definitions = def.definitions?.map((def) => {
@@ -47,6 +47,8 @@ export default async (word: string) => {
               '">Source</a>',
           },
         });
+      } catch (err) {
+        console.log("Houston? We got an issue at Thesaurus.", err);
       }
     }
   }
