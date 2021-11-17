@@ -21,10 +21,9 @@ export default async (word: string) => {
           input_message_content: {
             parse_mode: "HTML",
             message_text:
-              "<b><i>" +
+              "<b><i>📕 Definition of " +
               definitionUrbanDictionary.word.toUpperCase() +
-              "</i></b> \n" +
-              "<b>📕 Definition:</b> \n" +
+              "</i></b> \n\n" +
               definitionUrbanDictionary.definition +
               "\n\n" +
               "<b>📣 Example: </b> \n <i>" +

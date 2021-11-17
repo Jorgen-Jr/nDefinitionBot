@@ -29,11 +29,11 @@ export default async (word: string) => {
             input_message_content: {
               parse_mode: "HTML",
               message_text:
-                "<b><i>" +
+                "<b><i>📕 Definição de " +
                 word.toUpperCase() +
-                "</i></b> \n📕 Definição:\n\n" +
+                "</i></b> \n\n" +
                 definitionsDicio.join("\n") +
-                "\n 📣 Exemplo:\n" +
+                "\n\n <b>📣 Exemplos </b>\n" +
                 examplesDicio.join("\n"),
             },
             reply_markup: {

@@ -30,7 +30,11 @@ export default async (word: string) => {
           input_message_content: {
             parse_mode: "HTML",
             message_text:
-              "<b><i>" + word.toUpperCase() + "</i></b>\n📕 Definition:\n" + definitionsThesaurus.join("\n\n") + "\n",
+              "<b><i>📕 Definition of " +
+              word.toUpperCase() +
+              "</i></b>\n\n" +
+              definitionsThesaurus.join("\n\n") +
+              "\n",
           },
           reply_markup: {
             inline_keyboard: [

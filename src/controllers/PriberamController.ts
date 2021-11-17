@@ -28,11 +28,10 @@ export default async (word: string) => {
           input_message_content: {
             parse_mode: "HTML",
             message_text:
-              "<b><i>" +
+              "<b><i>📕 Definição de " +
               definitionPriberam.word.toUpperCase() +
-              "</i></b>\n📕 Definition:\n" +
-              definitionsPriberam.join("\n") +
-              "\n\n",
+              "</i></b>\n\n" +
+              definitionsPriberam.join("\n"),
           },
           reply_markup: {
             inline_keyboard: [
