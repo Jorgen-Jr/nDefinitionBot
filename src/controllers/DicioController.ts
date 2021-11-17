@@ -8,41 +8,43 @@ export default async (word: string) => {
     return res.data;
   });
 
-  if (definitionDicio.definition) {
-    if (definitionDicio.definition.length > 0) {
-      try {
-        const definitionsDicio = definitionDicio.definition.map((def: String) => {
-          return def;
-        });
-        console.log(definitionDicio.definition);
+  definitionDicio.forEach((dicio_definicion: any) => {
+    if (dicio_definicion.definition) {
+      if (dicio_definicion.definition.length > 0) {
+        try {
+          const definitionsDicio = dicio_definicion.definition.map((def: String) => {
+            return def;
+          });
+          console.log(dicio_definicion.definition);
 
-        const examplesDicio = definitionDicio.example.map((example: String) => {
-          return "<i>" + example + "</i> ";
-        });
-        console.log(definitionDicio.example);
+          const examplesDicio = definitionDicio.example.map((example: String) => {
+            return "<i>" + example + "</i> ";
+          });
+          console.log(dicio_definicion.example);
 
-        results.push({
-          type: "Article",
-          id: "Dicio" + results.length,
-          title: "Dicio",
-          thumb_url: "https://www.dicio.com.br/favicon-96x96.png",
-          description: definitionDicio.word.toUpperCase() + " " + definitionDicio.definition[0],
-          input_message_content: {
-            parse_mode: "HTML",
-            message_text: "<b><i>" + word + "</i></b> \n" + definitionsDicio.join("\n") + examplesDicio.join("\n"),
-          },
-          reply_markup: [
-            {
-              text: "Fonte",
-              url: definitionDicio.source,
+          results.push({
+            type: "Article",
+            id: "Dicio" + results.length,
+            title: "Dicio",
+            thumb_url: "https://www.dicio.com.br/favicon-96x96.png",
+            description: dicio_definicion.word.toUpperCase() + " " + dicio_definicion.definition[0],
+            input_message_content: {
+              parse_mode: "HTML",
+              message_text: "<b><i>" + word + "</i></b> \n" + definitionsDicio.join("\n") + examplesDicio.join("\n"),
             },
-          ],
-        });
-      } catch (err) {
-        console.error("Houston? We got an issue at Dicio.", err);
+            reply_markup: [
+              {
+                text: "Fonte",
+                url: definitionDicio.source,
+              },
+            ],
+          });
+        } catch (err) {
+          console.error("Houston? We got an issue at Dicio.", err);
+        }
       }
     }
-  }
+  });
 
   return results;
 };
