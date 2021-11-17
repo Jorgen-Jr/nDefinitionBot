@@ -30,7 +30,7 @@ export default async (word: string) => {
             message_text:
               "<b><i>📕 Definição de " +
               definitionPriberam.word.toUpperCase() +
-              "</i></b>\n\n" +
+              "</i></b>\n" +
               definitionsPriberam.join("\n"),
           },
           reply_markup: {

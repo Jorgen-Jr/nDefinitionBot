@@ -31,7 +31,7 @@ export default async (word: string) => {
               message_text:
                 "<b><i>📕 Definição de " +
                 word.toUpperCase() +
-                "</i></b> \n\n" +
+                "</i></b>\n" +
                 definitionsDicio.join("\n") +
                 "\n\n <b>📣 Exemplos </b>\n" +
                 examplesDicio.join("\n"),

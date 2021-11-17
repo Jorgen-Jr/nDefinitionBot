@@ -23,7 +23,7 @@ export default async (word: string) => {
             message_text:
               "<b><i>📕 Definition of " +
               definitionUrbanDictionary.word.toUpperCase() +
-              "</i></b> \n\n" +
+              "</i></b>\n" +
               definitionUrbanDictionary.definition +
               "\n\n" +
               "<b>📣 Example: </b> \n <i>" +
