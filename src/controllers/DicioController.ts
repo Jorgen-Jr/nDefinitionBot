@@ -28,7 +28,8 @@ export default async (word: string) => {
             description: dicio_definition.word.toUpperCase() + " " + dicio_definition.definition[0],
             input_message_content: {
               parse_mode: "HTML",
-              message_text: "<b><i>" + word + "</i></b> \n" + definitionsDicio.join("\n") + examplesDicio.join("\n"),
+              message_text:
+                "<b><i>" + word + "</i></b> \n" + definitionsDicio.join("\n\n") + "\n\n" + examplesDicio.join("\n\n"),
             },
             // reply_markup: {
             //   inline_keyboard: [

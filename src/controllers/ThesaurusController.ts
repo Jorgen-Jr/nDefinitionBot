@@ -31,16 +31,16 @@ export default async (word: string) => {
             parse_mode: "HTML",
             message_text: "<b><i>" + word + "</i></b> \n" + definitionsThesaurus.join("\n\n") + "\n",
           },
-          // reply_markup: {
-          //   inline_keyboard: [
-          //     [
-          //       {
-          //         text: "Source",
-          //         url: definitionThesaurus.source,
-          //       },
-          //     ],
-          //   ],
-          // },
+          reply_markup: {
+            inline_keyboard: [
+              [
+                {
+                  text: "Source",
+                  url: definitionThesaurus.source,
+                },
+              ],
+            ],
+          },
         });
       } catch (err) {
         console.error("Houston? We got an issue at Thesaurus.", err);
