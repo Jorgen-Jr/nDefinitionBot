@@ -30,16 +30,16 @@ export default async (word: string) => {
               parse_mode: "HTML",
               message_text: "<b><i>" + word + "</i></b> \n" + definitionsDicio.join("\n") + examplesDicio.join("\n"),
             },
-            reply_markup: {
-              inline_keyboard: [
-                [
-                  {
-                    text: "Fonte",
-                    url: definitionDicio.source,
-                  },
-                ],
-              ],
-            },
+            // reply_markup: {
+            //   inline_keyboard: [
+            //     [
+            //       {
+            //         text: "Fonte",
+            //         url: dicio_definition.source,
+            //       },
+            //     ],
+            //   ],
+            // },
           });
         } catch (err) {
           console.error("Houston? We got an issue at Dicio.", err);

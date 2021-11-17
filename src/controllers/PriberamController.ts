@@ -29,16 +29,16 @@ export default async (word: string) => {
             parse_mode: "HTML",
             message_text: "<b><i>" + definitionPriberam.word + "</i></b> \n" + definitionsPriberam.join("\n") + "\n\n",
           },
-          reply_markup: {
-            inline_keyboard: [
-              [
-                {
-                  text: "Fonte",
-                  url: definitionPriberam.source,
-                },
-              ],
-            ],
-          },
+          // reply_markup: {
+          //   inline_keyboard: [
+          //     [
+          //       {
+          //         text: "Fonte",
+          //         url: definitionPriberam.source,
+          //       },
+          //     ],
+          //   ],
+          // },
         });
       } catch (err) {
         console.error("Houston? We have an issue with Priberam:", err);
