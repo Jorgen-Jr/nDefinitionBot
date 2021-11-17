@@ -29,11 +29,12 @@ export default async (word: string) => {
               "\n\n" +
               "<b>Example:</b> <i>" +
               definitionUrbanDictionary.examples +
-              "</i> \n",
+              "</i> \n" +
+              "\n",
           },
           reply_markup: [
             {
-              text: "Source 🔎",
+              text: "Source",
               url: definitionUrbanDictionary.source,
             },
           ],

@@ -31,7 +31,7 @@ export default async (word: string) => {
           },
           reply_markup: [
             {
-              text: "Fonte 🔎",
+              text: "Fonte",
               url: definitionDicio.source,
             },
           ],

@@ -29,11 +29,11 @@ export default async (word: string) => {
             definitionThesaurus.word.toUpperCase() + " " + definitionThesaurus.definition[0].definitions[0].definition,
           input_message_content: {
             parse_mode: "HTML",
-            message_text: "<b><i>" + word + "</i></b> \n" + definitionsThesaurus.join("\n\n"),
+            message_text: "<b><i>" + word + "</i></b> \n" + definitionsThesaurus.join("\n\n") + "\n",
           },
           reply_markup: [
             {
-              text: "Source 🔎",
+              text: "Source",
               url: definitionThesaurus.source,
             },
           ],
