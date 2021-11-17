@@ -115,6 +115,8 @@ exports.handler = async event => {
         //Catch the word from Dicio
         results.push(...(await DicioController.default(word)));
 
+        console.info(results.length + " found!");
+
         if (inline_query) {
             if (results.length === 0) {
                 results.push({
@@ -134,7 +136,7 @@ exports.handler = async event => {
             /* Answer said inline query. */
             response = {
                 inline_query_id: inline_query.id,
-                results,
+                results: results.slice(0, 50), //Limiting to 50 results to avoid errors.
             };
 
             const res = await answerInlineQuery(response);
