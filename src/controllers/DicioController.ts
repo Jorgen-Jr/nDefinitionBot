@@ -8,26 +8,26 @@ export default async (word: string) => {
     return res.data;
   });
 
-  definitionDicio.forEach((dicio_definicion: any) => {
-    if (dicio_definicion.definition) {
-      if (dicio_definicion.definition.length > 0) {
+  definitionDicio.forEach((dicio_definition: any) => {
+    if (dicio_definition.definition) {
+      if (dicio_definition.definition.length > 0) {
         try {
-          const definitionsDicio = dicio_definicion.definition.map((def: String) => {
+          const definitionsDicio = dicio_definition.definition.map((def: String) => {
             return def;
           });
-          console.log(dicio_definicion.definition);
+          console.log(definitionsDicio);
 
-          const examplesDicio = definitionDicio.example.map((example: String) => {
+          const examplesDicio = dicio_definition.example.map((example: String) => {
             return "<i>" + example + "</i> ";
           });
-          console.log(dicio_definicion.example);
+          console.log(examplesDicio);
 
           results.push({
             type: "Article",
             id: "Dicio" + results.length,
             title: "Dicio",
             thumb_url: "https://www.dicio.com.br/favicon-96x96.png",
-            description: dicio_definicion.word.toUpperCase() + " " + dicio_definicion.definition[0],
+            description: dicio_definition.word.toUpperCase() + " " + dicio_definition.definition[0],
             input_message_content: {
               parse_mode: "HTML",
               message_text: "<b><i>" + word + "</i></b> \n" + definitionsDicio.join("\n") + examplesDicio.join("\n"),
