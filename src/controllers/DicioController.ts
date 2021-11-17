@@ -15,12 +15,10 @@ export default async (word: string) => {
           const definitionsDicio = dicio_definition.definition.map((def: String) => {
             return def;
           });
-          console.log(definitionsDicio);
 
           const examplesDicio = dicio_definition.example.map((example: String) => {
             return "<i>" + example + "</i> ";
           });
-          console.log(examplesDicio);
 
           results.push({
             type: "Article",
