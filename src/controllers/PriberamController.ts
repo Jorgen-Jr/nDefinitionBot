@@ -27,13 +27,18 @@ export default async (word: string) => {
           description: definitionPriberam.word + " " + definitionPriberam.definition[0].definition,
           input_message_content: {
             parse_mode: "HTML",
-            message_text: "<b><i>" + definitionPriberam.word + "</i></b> \n" + definitionsPriberam.join("\n") + "\n\n",
+            message_text:
+              "<b><i>" +
+              definitionPriberam.word.toUpperCase() +
+              "</i></b>\n📕 Definition:\n" +
+              definitionsPriberam.join("\n") +
+              "\n\n",
           },
           reply_markup: {
             inline_keyboard: [
               [
                 {
-                  text: "Fonte",
+                  text: "Fonte 🔎",
                   url: definitionPriberam.source,
                 },
               ],

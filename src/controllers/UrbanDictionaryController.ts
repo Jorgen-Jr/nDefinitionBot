@@ -22,12 +22,12 @@ export default async (word: string) => {
             parse_mode: "HTML",
             message_text:
               "<b><i>" +
-              definitionUrbanDictionary.word +
-              "</i></b> \n\n" +
-              "<b>Definition:</b> " +
+              definitionUrbanDictionary.word.toUpperCase() +
+              "</i></b> \n" +
+              "<b>📕 Definition:</b> \n" +
               definitionUrbanDictionary.definition +
               "\n\n" +
-              "<b>Example:</b> <i>" +
+              "<b>📣 Example: </b> \n <i>" +
               definitionUrbanDictionary.examples +
               "</i> \n" +
               "\n",
@@ -36,7 +36,7 @@ export default async (word: string) => {
             inline_keyboard: [
               [
                 {
-                  text: "Source",
+                  text: "Source 🔎",
                   url: definitionUrbanDictionary.source,
                 },
               ],

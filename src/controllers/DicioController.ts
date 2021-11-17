@@ -29,13 +29,18 @@ export default async (word: string) => {
             input_message_content: {
               parse_mode: "HTML",
               message_text:
-                "<b><i>" + word + "</i></b> \n" + definitionsDicio.join("\n\n") + "\n\n" + examplesDicio.join("\n\n"),
+                "<b><i>" +
+                word.toUpperCase() +
+                "</i></b> \n📕 Definição:\n\n" +
+                definitionsDicio.join("\n") +
+                "\n 📣 Exemplo:\n" +
+                examplesDicio.join("\n"),
             },
             reply_markup: {
               inline_keyboard: [
                 [
                   {
-                    text: "Fonte",
+                    text: "Fonte 🔎",
                     url: dicio_definition.source,
                   },
                 ],
