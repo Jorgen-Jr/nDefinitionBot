@@ -113,7 +113,7 @@ exports.handler = async event => {
         results.push(...(await UrbanDictionaryController.default(word)));
 
         //Catch the word from Dicio
-        results.push(...(await Dicio.default(word)));
+        results.push(...(await DicioController.default(word)));
 
         if (inline_query) {
             if (results.length === 0) {
