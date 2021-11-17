@@ -6,6 +6,7 @@ import { InlineQueryResult, query } from "./types";
 import TelegramBot from "node-telegram-bot-api";
 
 import getRandomWord from "./util/getRandomWord";
+import DicioController from "./controllers/DicioController";
 
 const token = process.env.BOT_TOKEN;
 
@@ -16,15 +17,12 @@ if (token) {
   bot = new TelegramBot(token, { polling: true });
 
   bot.on("inline_query", async (query: query) => {
-    const queryContent =
-      query.query.replace(" ", "%20") || (await getRandomWord());
+    const queryContent = query.query.replace(" ", "%20") || (await getRandomWord());
 
     let results: InlineQueryResult[] = [];
 
     if (queryContent) {
-      console.log(
-        new Date().toUTCString() + " - Fetching word: " + queryContent
-      );
+      console.log(new Date().toUTCString() + " - Fetching word: " + queryContent);
 
       //Catch the word from TheSaurus
       results.push(...(await ThesaurusController(queryContent)));
@@ -34,6 +32,9 @@ if (token) {
 
       //Catch the word from Urban Dictionary
       results.push(...(await UrbanDictionaryController(queryContent)));
+
+      //Catch the word from DicioController
+      results.push(...(await DicioController(queryContent)));
     }
 
     if (results.length === 0) {
@@ -41,8 +42,7 @@ if (token) {
         type: "Article",
         id: "404_" + results.length,
         title: "Not Found",
-        thumb_url:
-          "https://muwado.com/wp-content/uploads/2014/06/sad-smiley-face.png",
+        thumb_url: "https://muwado.com/wp-content/uploads/2014/06/sad-smiley-face.png",
         description: ":(",
         input_message_content: {
           parse_mode: "HTML",
@@ -76,21 +76,14 @@ if (token) {
 
     if (results.length === 0) {
       // send a message in case it doesn't find anything.
-      bot?.sendMessage(
-        chatId,
-        "Sorry, coudn't catch that 😢 \nPlease use only inline commands for now."
-      );
+      bot?.sendMessage(chatId, "Sorry, coudn't catch that 😢 \nPlease use only inline commands for now.");
     }
 
     // send a message to the chat acknowledging receipt of their message
     const parse_mode: any = { parse_mode: "HTML" };
 
     results.forEach((result: InlineQueryResult) => {
-      bot?.sendMessage(
-        chatId,
-        result.input_message_content.message_text,
-        parse_mode
-      );
+      bot?.sendMessage(chatId, result.input_message_content.message_text, parse_mode);
     });
   });
 }

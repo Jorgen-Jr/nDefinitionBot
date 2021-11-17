@@ -64,6 +64,7 @@ Let's get to it.
 const ThesaurusController = require("../dist/controllers/ThesaurusController");
 const PriberamController = require("../dist/controllers/PriberamController");
 const UrbanDictionaryController = require("../dist/controllers/UrbanDictionaryController");
+const DicioController = require("../dist/controllers/DicioController");
 
 const getRandomWord = require("../dist/util/getRandomWord");
 
@@ -110,6 +111,9 @@ exports.handler = async event => {
 
         //Catch the word from Urban Dictionary
         results.push(...(await UrbanDictionaryController.default(word)));
+
+        //Catch the word from Dicio
+        results.push(...(await DicioController.default(word)));
 
         if (inline_query) {
             if (results.length === 0) {
