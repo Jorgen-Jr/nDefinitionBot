@@ -112,8 +112,14 @@ exports.handler = async event => {
         //Catch the word from Urban Dictionary
         results.push(...(await UrbanDictionaryController.default(word)));
 
-        //Catch the word from Dicio
-        results.push(...(await DicioController.default(word)));
+        const dicio_result = [];
+
+        try {
+            dicio_result = await DicioController.default(word);
+            result.push(dicio_result);
+        } catch (e) {
+            console.log(e);
+        }
 
         if (inline_query) {
             if (results.length === 0) {

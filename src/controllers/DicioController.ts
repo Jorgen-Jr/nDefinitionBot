@@ -8,6 +8,8 @@ export default async (word: string) => {
     return res.data;
   });
 
+  console.log(definitionDicio);
+
   if (definitionDicio.definition) {
     if (definitionDicio.definition.length > 0) {
       try {
