@@ -112,7 +112,7 @@ exports.handler = async event => {
         //Catch the word from Urban Dictionary
         results.push(...(await UrbanDictionaryController.default(word)));
 
-        const dicio_result = [];
+        let dicio_result = [];
 
         try {
             dicio_result = await DicioController.default(word);

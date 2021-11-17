@@ -8,18 +8,18 @@ export default async (word: string) => {
     return res.data;
   });
 
-  console.log(definitionDicio);
-
   if (definitionDicio.definition) {
     if (definitionDicio.definition.length > 0) {
       try {
         const definitionsDicio = definitionDicio.definition.map((def: String) => {
           return def;
         });
+        console.log(definitionDicio.definition);
 
         const examplesDicio = definitionDicio.example.map((example: String) => {
           return "<i>" + example + "</i> ";
         });
+        console.log(definitionDicio.example);
 
         results.push({
           type: "Article",
