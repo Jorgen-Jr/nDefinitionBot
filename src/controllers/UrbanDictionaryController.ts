@@ -32,12 +32,16 @@ export default async (word: string) => {
               "</i> \n" +
               "\n",
           },
-          reply_markup: [
-            {
-              text: "Source",
-              url: definitionUrbanDictionary.source,
-            },
-          ],
+          reply_markup: {
+            inline_keyboard: [
+              [
+                {
+                  text: "Source",
+                  url: definitionUrbanDictionary.source,
+                },
+              ],
+            ],
+          },
         });
       });
     }
