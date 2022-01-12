@@ -21,8 +21,7 @@ export default async (word: string) => {
           title: "Thesaurus",
           thumb_url:
             "https://3.bp.blogspot.com/-orTOtEr_7M4/WbSpGZSNEVI/AAAAAAAAahY/J8GpIYK2rBsmeTQFzZYjhmUK96mdBpxXQCLcBGAs/s1600/thesaurus-logo.jpg",
-          description:
-            definitionThesaurus.word.toUpperCase() + " " + definitionThesaurus.definition[0].definitions[0].definition,
+          description: definitionThesaurus.word.toUpperCase() + " " + definitionThesaurus[0],
           input_message_content: {
             parse_mode: "HTML",
             message_text:
