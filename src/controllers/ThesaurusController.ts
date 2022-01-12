@@ -11,12 +11,8 @@ export default async (word: string) => {
   if (definitionThesaurus.definition) {
     if (definitionThesaurus.definition.length > 0) {
       try {
-        const definitionsThesaurus = definitionThesaurus.definition.map((def: DefinitionObject) => {
-          const all_definitions = def.definitions?.map((def) => {
-            return "<i>" + def.index + "</i> " + def.definition;
-          });
-
-          return "\n<i>" + def.category + "</i> \n" + all_definitions?.join("\n");
+        const definitionsThesaurus = definitionThesaurus.definition.map((def: String) => {
+          return def;
         });
 
         results.push({

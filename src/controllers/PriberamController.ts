@@ -11,12 +11,8 @@ export default async (word: string) => {
   if (definitionPriberam.definition) {
     if (definitionPriberam.definition.length > 0) {
       try {
-        const definitionsPriberam = definitionPriberam.definition.map((def: DefinitionObject) => {
-          if (def.index === 0) {
-            return "<b><i>" + def.definition + "</i></b>";
-          } else {
-            return "<b><i>" + def.index + "</i></b> " + def.definition;
-          }
+        const definitionsPriberam = definitionPriberam.definition.map((def: String) => {
+          return def;
         });
 
         results.push({

@@ -27,7 +27,7 @@ export default async (word: string) => {
               definitionUrbanDictionary.definition +
               "\n\n" +
               "<b>📣 Example: </b> \n <i>" +
-              definitionUrbanDictionary.examples +
+              definitionUrbanDictionary.example +
               "</i> \n" +
               "\n",
           },
