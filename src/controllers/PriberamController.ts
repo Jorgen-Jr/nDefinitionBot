@@ -20,7 +20,7 @@ export default async (word: string) => {
           id: "Priberam" + results.length,
           title: "Priberam",
           thumb_url: "https://img.ibxk.com.br/2014/2/programas/9695104192743330.png",
-          description: definitionPriberam.word + " " + definitionPriberam[0],
+          description: definitionPriberam.word + " " + definitionsPriberam[0],
           input_message_content: {
             parse_mode: "HTML",
             message_text:
