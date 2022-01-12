@@ -1,5 +1,5 @@
 import thedictapi from "../services/thedictapi";
-import { DefinitionObject, InlineQueryResult } from "../types";
+import { InlineQueryResult } from "../types";
 
 export default async (word: string) => {
   let results: InlineQueryResult[] = [];
