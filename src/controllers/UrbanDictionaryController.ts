@@ -21,22 +21,26 @@ export default async (word: string) => {
           input_message_content: {
             parse_mode: "HTML",
             message_text:
-              "<b><i>" +
-              definitionUrbanDictionary.word +
-              "</i></b> \n\n" +
-              "<b>Definition:</b> " +
+              "<b><i>📕 Definition of " +
+              definitionUrbanDictionary.word.toUpperCase() +
+              "</i></b>\n" +
               definitionUrbanDictionary.definition +
               "\n\n" +
-              "<b>Example:</b> <i>" +
-              definitionUrbanDictionary.examples +
-              "</i> \n",
+              "<b>📣 Example: </b> \n <i>" +
+              definitionUrbanDictionary.example +
+              "</i> \n" +
+              "\n",
           },
-          reply_markup: [
-            {
-              text: "Source 🔎",
-              url: definitionUrbanDictionary.source,
-            },
-          ],
+          reply_markup: {
+            inline_keyboard: [
+              [
+                {
+                  text: "Source 🔎",
+                  url: definitionUrbanDictionary.source,
+                },
+              ],
+            ],
+          },
         });
       });
     }

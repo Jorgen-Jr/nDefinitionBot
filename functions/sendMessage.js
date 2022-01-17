@@ -11,7 +11,7 @@ exports.handler = async event => {
 
     console.log('BOT endpoint: ' + bot_url);
 
-    const res = await axios.post(bot_url + '/answerInlineQuery', response);
+    const res = await axios.post(bot_url + '/sendMessage', response);
 
     success = res.status === 200 ? true : false;
 

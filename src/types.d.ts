@@ -10,9 +10,9 @@ export type Definition = {
   word: string;
   definition: DefinitionObject;
   source: string;
-  synonyms?: string[];
-  examples?: string[];
-  antonyms?: string[];
+  synonym?: string[];
+  example?: string[];
+  antonym?: string[];
 };
 
 export type DefinitionObject = {

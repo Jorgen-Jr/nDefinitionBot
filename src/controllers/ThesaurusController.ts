@@ -1,5 +1,5 @@
 import thedictapi from "../services/thedictapi";
-import { DefinitionObject, InlineQueryResult } from "src/types";
+import { InlineQueryResult } from "src/types";
 
 export default async (word: string) => {
   let results: InlineQueryResult[] = [];
@@ -11,12 +11,8 @@ export default async (word: string) => {
   if (definitionThesaurus.definition) {
     if (definitionThesaurus.definition.length > 0) {
       try {
-        const definitionsThesaurus = definitionThesaurus.definition.map((def: DefinitionObject) => {
-          const all_definitions = def.definitions?.map((def) => {
-            return "<i>" + def.index + "</i> " + def.definition;
-          });
-
-          return "\n<i>" + def.category + "</i> \n" + all_definitions?.join("\n");
+        const definitionsThesaurus = definitionThesaurus.definition.map((def: String) => {
+          return def;
         });
 
         results.push({
@@ -25,18 +21,22 @@ export default async (word: string) => {
           title: "Thesaurus",
           thumb_url:
             "https://3.bp.blogspot.com/-orTOtEr_7M4/WbSpGZSNEVI/AAAAAAAAahY/J8GpIYK2rBsmeTQFzZYjhmUK96mdBpxXQCLcBGAs/s1600/thesaurus-logo.jpg",
-          description:
-            definitionThesaurus.word.toUpperCase() + " " + definitionThesaurus.definition[0].definitions[0].definition,
+          description: definitionThesaurus.word.toUpperCase() + " " + definitionsThesaurus[0],
           input_message_content: {
             parse_mode: "HTML",
-            message_text: "<b><i>" + word + "</i></b> \n" + definitionsThesaurus.join("\n\n"),
+            message_text:
+              "<b><i>📕 Definition of " + word.toUpperCase() + "</i></b>\n" + definitionsThesaurus.join("\n\n") + "\n",
           },
-          reply_markup: [
-            {
-              text: "Source 🔎",
-              url: definitionThesaurus.source,
-            },
-          ],
+          reply_markup: {
+            inline_keyboard: [
+              [
+                {
+                  text: "Source 🔎",
+                  url: definitionThesaurus.source,
+                },
+              ],
+            ],
+          },
         });
       } catch (err) {
         console.error("Houston? We got an issue at Thesaurus.", err);
